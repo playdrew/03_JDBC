@@ -37,6 +37,8 @@ public class Application2 {
             /* Index. 6. ResultSet 에 담긴 결과 집합을 next()반복으로 출력*/
             if(rset.next()){
                 System.out.println(rset.getString("EMP_ID") + "번 : " + rset.getString("EMP_NAME"));
+            } else {
+                System.out.println("조회하신 사번의 이름이 없습니다.");
             }
 
         } catch (SQLException e) {
@@ -49,3 +51,5 @@ public class Application2 {
         }
     }
 }
+
+// 변수의 단점을 해결한게 배열 배열의 단점을 해결한게 컬렉션
