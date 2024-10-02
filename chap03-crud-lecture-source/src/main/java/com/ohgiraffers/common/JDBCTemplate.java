@@ -1,10 +1,8 @@
-package com.ohgiraffers.section02.template;
+package com.ohgiraffers.common;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Properties;
 
 public class JDBCTemplate {
@@ -52,11 +50,32 @@ public class JDBCTemplate {
             throw new RuntimeException(e);
         }
     }
+
+    public static void close(Statement stmt){
+
+        //비트연산자 => 좌항과 우항을 모두 비교
+        //&는 &&는 왼쪽항이 false 면 뒤에 항은 비교하지도 않는데
+        //비트연산자 &는 왼쪽항이 false 도 둘다 비교한다
+        try {
+            if(stmt != null & !stmt.isClosed()){
+                stmt.close();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void close(ResultSet rset){
+
+        //비트연산자 => 좌항과 우항을 모두 비교
+        //&는 &&는 왼쪽항이 false 면 뒤에 항은 비교하지도 않는데
+        //비트연산자 &는 왼쪽항이 false 도 둘다 비교한다
+        try {
+            if(rset != null & !rset.isClosed()){
+                rset.close();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
-
-// 어플리케이션과 dbms 를 연결하기 위한 것을 jdbc 라고 부릅니다.
-// jdbc 에서 가장 중요한 것은 연결 connection 입니다
-// 어플리케이션에서 작성한 쿼리를 데이터베이스에서 실행해줘 statement
-// 실행후에 결과문을 돌려주는 과정을 resultSet 으로 담아줍니다.
-// 연결통로 만들고 쿼리문 보내주고 결과를 담아주고 3가지 과정이 있습니다.
-
