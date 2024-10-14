@@ -23,6 +23,8 @@ public class JDBCTemplate {
             String url = prop.getProperty("url");
 
             Class.forName(driver);
+            //Class.forName("com.mysql.cj.jdbc.Driver");
+            //con = DriverManager.getConnection("jdbc:mysql//localhost/menudb");
 
             con = DriverManager.getConnection(url,prop);
 
